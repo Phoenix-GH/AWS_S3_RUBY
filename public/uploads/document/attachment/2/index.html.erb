@@ -1,0 +1,81 @@
+<div class="clearfix" id="content">
+<div class="contentwrapper">
+  <div class="heading">
+
+    <h3>Risk Category</h3>
+
+    <%= render 'common/search_form' %>
+
+    <ul class="breadcrumb">
+      <li>You are here:</li>
+      <li><%= link_to risk_categories_path, class: 'tip', title: 'back to Projects' do %>
+            <span class="icon16 icomoon-icon-book-2"></span>
+        <% end %>
+        <span class="divider"><span class="icon16 icomoon-icon-arrow-right-3"></span></span>
+      </li>
+      <li class="active">Risk Categories</li>
+    </ul>
+    <%= render partial: 'home/user_name' %>
+  </div><!-- End .heading-->
+
+  <div class="row">
+
+    <div class="col-xs-12 marginB10 text-right">
+
+      <%= link_to new_risk_path, class: "btn btn-primary" do %>
+          <span class="icon16 icomoon-icon-pencil-3 white"></span>Add New Risk Category
+      <% end %>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            <span>Risk Category</span>
+          </h4>
+        </div>
+        <div class="panel-body noPad clearfix">
+          <div class="table-responsive">
+            <table cellpadding="0" cellspacing="0" border="0" class="dynamicTable display table table-bordered" width="100%">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Edit</th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @risks.each_with_index do |risk, index| %>
+                  <tr class="<%= index % 2 == 0 ? 'even' : 'odd' %>">
+                    <td><%= link_to content_tag(:div, risk.context,:style=>""), edit_risk_path(risk)%></td>
+                    <td><%= link_to content_tag(:div, risk.description), edit_risk_path(risk)%> </td>
+                    <!-- <td><%#= link_to content_tag(:div, risk.user.email ), edit_risk_path(risk) %> </td> -->
+                    <td>
+                    <div class="controls text-center">
+                      <%= link_to(edit_risk_path(risk), title: "View Details", class: "tip") do %>
+                          <span class="icon14 icomoon-icon-search-3"></span>
+                      <% end %>
+                    </div>
+                    </td>
+                  </tr>
+              <% end %>
+              </tbody>
+             
+          </div>
+        </div>
+      </div>
+      <!-- End .panel -->
+    </div>
+    <!-- End .span12 -->
+
+  </div><!-- End .row -->
+</div>
+</div>
+<script type="text/javascript">
+  $('.dynamicTable a').addClass('link_to_css')
+</script>

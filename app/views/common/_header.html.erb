@@ -1,0 +1,29 @@
+<div class="header container-fluid"> 
+  <!-- Second navbar for profile settings -->
+  <nav class="navbar navbar-inverse">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Demo</a>
+    </div>
+    <div class="navbar-header back-btn">
+      <%= link_to fa_icon('arrow-left')+' back', :back%>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-4">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'Folders', folders_path %></li>
+        <li><%= link_to 'Documents', documents_path %></li>
+        <li>
+          <a class="btn btn-default btn-outline btn-circle" href="<%= edit_user_registration_path %>">Profile <i class=""></i> </a>
+        </li>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>
+        <% else %>
+          <li><a href="<%= new_user_session_path %>">Login</a></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav><!-- /.navbar -->
+</div><!-- /.container-fluid -->

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class='col-md-1'>
+  <%= @document.name %>
+  <div class='row'>
+    <div class='doc-img col-md-12'>
+      <% if image_file_type? document.attachment %>
+        <img src="<%= document.attachment.url %>" data-id="<%= document.id %>"/>
+      <% else %>
+        <img src="/assets/document.jpg" data-id="<%= document.id %>"/>
+      <% end %>
+    </div>
+  </div>
+</div>

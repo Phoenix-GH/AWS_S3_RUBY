@@ -1,0 +1,34 @@
+<%= form_for(@document) do |f| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag :folder_id, @document.try(:folder_id) %>
+
+  <div class='row'>
+    <div class='col-md-6'>
+      <%= f.text_field :name, placeholder: 'Document name...', class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+  <% unless @document.attachment.try(:path).present? %>
+    <div class='row'>
+      <div class='col-md-6'>
+        <%= f.file_field :attachment, placeholder: 'Attachment file' %>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  <div class='col-md-12 actions'>
+    <%= f.submit %>
+  </div>
+<% end %>

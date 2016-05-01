@@ -1,0 +1,43 @@
+// Place all the styles related to the folders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.folder {
+  padding: 33px;
+  border: 1px solid;
+  margin: 10px;
+  text-align: center;
+}
+
+.folders {
+  overflow: auto;
+}
+
+.documents {
+  overflow: inherit;
+}
+
+.doc-div {
+  margin-top: 5px;
+}
+
+.doc-img img {
+  width: 100%;
+  min-height: 90px !important;
+  max-height: 90px;
+}
+
+.doc-option {
+  padding: 5px;
+}
+
+.new-object {
+  border: 1px solid;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.hover { 
+  background-color: lightgrey;
+  border-color: darkslategray;
+}

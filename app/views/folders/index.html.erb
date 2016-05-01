@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<div class='folders'>
+  <h3>Listing Folders</h3>
+  <br>
+  <%= link_to 'New Folder', new_folder_path, class: 'new-object' %>
+  <br>
+  <br>
+
+  <div class='col-md-12'>
+    <% @folders.each do |folder| %>
+      <div class='col-md-2'>
+        <a href="<%= folder_path(folder) %>", style='disply-block:inline;'>
+          <div class='folder folder-drop' data-id="<%= folder.id %>">
+            <%= folder.name %>
+          </div>
+        </a>
+        <div class='text-center'>
+          <%= link_to fa_icon('edit'), edit_folder_path(folder), title: 'Rename' %> |
+          <%= link_to fa_icon('trash'), folder, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class='documents drag'>
+  <h3>Listing Documents</h3>
+  <br>
+  <%= link_to 'New Document', new_document_path, class: 'new-object' %>
+  <br>
+  <br>
+  <div class='docs'>
+    <% current_user.documents.where(folder_id: nil).each do |document| %>
+      <div class='col-md-1 doc-div' id='doc-div-<%= document.id %>'>
+        <div class='text-center'>
+          <%= document.name.truncate(10) %>
+        </div>
+        
+        <div class='doc-img'>
+          <% if image_file_type? document.attachment %>
+            <img src="<%= document.attachment.url %>" data-id="<%= document.id %>"/>
+          <% else %>
+            <img src="/assets/document.jpg" data-id="<%= document.id %>"/>
+          <% end %>
+        </div>
+        <div class='text-center'>
+          <%= link_to fa_icon('edit'), edit_document_path(document), title: 'Rename' %> |
+          <%= link_to fa_icon('trash'), document, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' %> |
+          <%= link_to fa_icon('download'), get_download_link(document), title: 'Download' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(".folder-drop").droppable({
+      hoverClass: "hover",
+      drop: function( event, ui ) {
+        folder_id = event.target.dataset.id;
+        doc_id = ui.draggable.data('id');
+        update_folder(folder_id, doc_id);
+      }
+  });
+
+  $(".drag img").draggable({
+      cursor: 'move',
+      revert: true
+  });
+
+  function update_folder(folder_id, doc_id) {
+    $.ajax({
+      method: 'post',
+      data: { doc_id: doc_id, folder_id: folder_id},
+      url: "<%= update_document_folder_path %>",
+      success: function(response){
+        if (response.status == "success") {
+          $('#doc-div-'+doc_id).remove();
+        }
+      }
+    })
+  }
+</script>

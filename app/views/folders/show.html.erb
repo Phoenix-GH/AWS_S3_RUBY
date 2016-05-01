@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<div class='documents'>
+  <h3>Listing Documents for <%= @folder.name %></h3>
+  <br>
+  <%= link_to 'New Document', new_document_path(folder_id: @folder.id ), class: 'new-object' %>
+  <br>
+  <br>
+  <div class='docs'>
+    <% @folder.documents.each do |document| %>
+      <div class='col-md-1 doc-div'>
+        <div class='text-center'>
+          <%= document.name.truncate(10) %>
+        </div>
+        <div class='doc-img'>
+          <% if image_file_type? document.attachment %>
+            <img src="<%= document.attachment.url %>" data-id="<%= document.id %>"/>
+          <% else %>
+            <img src="/assets/document.jpg" data-id="<%= document.id %>"/>
+          <% end %>
+        </div>
+        <div class='row'>
+          <div class='col-md-12 text-center'>
+            <%= link_to 'Edit', edit_document_path(document) %> |
+            <%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to fa_icon('download'), '#-', title: 'Download' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

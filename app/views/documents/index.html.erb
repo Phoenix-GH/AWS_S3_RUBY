@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Documents</h1>
+
+<%= link_to 'New Document', new_document_path, class: 'new-object' %>
+<br>
+<br>
+
+<% @documents.each do |document| %>
+  <div class='col-md-1 doc-div' id='doc-div-<%= document.id %>'>
+    <div class='text-center'>
+      <%= document.name.truncate(10) %>
+    </div>
+    <div class='doc-img'>
+      <% if image_file_type? document.attachment %>
+        <img src="<%= document.attachment.url %>" data-id="<%= document.id %>"/>
+      <% else %>
+        <img src="/assets/document.jpg" data-id="<%= document.id %>"/>
+      <% end %>
+    </div>
+    <div class='text-center'>
+      <%= link_to fa_icon('edit'), edit_document_path(document) %> |
+      <%= link_to fa_icon('trash'), document, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to fa_icon('download'), get_download_link(document), title: 'Download' %>
+    </div>
+  </div>
+<% end %>

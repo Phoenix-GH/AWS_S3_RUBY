@@ -1,0 +1,26 @@
+<div id="content">
+  <div class="contentwrapper">
+    <div class="new_risk">
+      <%= render 'home/user_name' %>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+.new_risk .btn {
+    border-radius: 5px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 9px 0;
+    text-transform: uppercase;
+    width: 17%;
+}
+.new_risk .no-padding{
+  padding: 0px 
+}
+#new_risk_measure textarea{
+  width: 98%;
+}
+</style>
+
+<%= render partial: 'risks/risk_js' %>
