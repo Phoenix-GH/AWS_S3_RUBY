@@ -15,8 +15,9 @@ development:
   encoding: utf8
   pool: 5
   username: root
-  password: root
-  socket: /opt/lampp/var/mysql/mysql.sock
+  password:
+  host: localhost
+  socket: '/tmp/mysql.sock'
   database: demo_development
 
 # Warning: The database defined as "test" will be erased and
